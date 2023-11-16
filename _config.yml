@@ -2,8 +2,8 @@ title: Nighthawk-Pages
 description: "August 2023 to June 2024"
 owner_name: Justin Quach
 github_username: JustinQ-DNHS
-github_repo: "Nighthawk-Pages"
-baseurl: "/Nighthawk-Pages"
+github_repo: "csse-er"
+baseurl: "/csse-er"
 remote_theme: jekyll/minima
 minima:
   social_links:
