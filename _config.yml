@@ -20,3 +20,6 @@ plugins:
 future: true
 header_pages:
  - AC_csse.md
+ - BC_tags.html
+ - BA_about.md
+ - BB_search.html
