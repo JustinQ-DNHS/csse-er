@@ -1,7 +1,7 @@
 ---
 layout: base
 title: Dynamic Game Levels
-description: Early steps in adding levels to an OOP Game.  This includes basic animations left-right-jump, multiple background, and simple callback to terminate each level.
+description: Early steps in adding levels to an OOP Game. This includes basic animations left-right-jump, multiple backgrounds, and simple callback to terminate each level.
 type: ccc
 courses: { csse: {week: 14}, csp: {week: 14}, csa: {week: 14} }
 image: /images/platformer/backgrounds/hills.png
@@ -14,9 +14,14 @@ image: /images/platformer/backgrounds/hills.png
     }
 </style>
 
+<!-- Load the YouTube Iframe API script -->
+<script async src="https://www.youtube.com/iframe_api"></script>
+
 <!-- Prepare DOM elements -->
 <!-- Wrap both the canvas and controls in a container div -->
 <div id="canvasContainer">
+    <!-- Add this div to contain the YouTube video player -->
+    <div id="youtubePlayer"></div>
     <div id="gameBegin" hidden>
         <button id="startGame">Start Game</button>
     </div>
@@ -34,7 +39,6 @@ image: /images/platformer/backgrounds/hills.png
     import GameEnv from '{{site.baseurl}}/assets/js/platformer/GameEnv.js';
     import GameLevel from '{{site.baseurl}}/assets/js/platformer/GameLevel.js';
     import GameControl from '{{site.baseurl}}/assets/js/platformer/GameControl.js';
-
 
     /*  ==========================================
      *  ======= Data Definitions =================
@@ -80,8 +84,15 @@ image: /images/platformer/backgrounds/hills.png
           s: { row: 12, frames: 15 },
           d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }
         }
+      },
+      enemies: {
+        goomba: {
+          src: "/images/platformer/sprites/goomba.png",
+          width: 448,
+          height: 452,
+        }
       }
-    };
+    }
 
     // add File to assets, ensure valid site.baseurl
     Object.keys(assets).forEach(category => {
@@ -121,17 +132,22 @@ image: /images/platformer/backgrounds/hills.png
     async function startGameCallback() {
       const id = document.getElementById("gameBegin");
       id.hidden = false;
-      
+
+      // Start playing the YouTube video
+      if (youtubePlayer) {
+          youtubePlayer.playVideo();
+      }
+
       // Use waitForRestart to wait for the restart button click
       await waitForButton('startGame');
       id.hidden = true;
-      
+
       return true;
     }
 
     // Home screen exits on Game Begin button
     function homeScreenCallback() {
-      // gameBegin hidden means game has started
+      // gameBegin hidden means the game has started
       const id = document.getElementById("gameBegin");
       return id.hidden;
     }
@@ -140,11 +156,11 @@ image: /images/platformer/backgrounds/hills.png
     async function gameOverCallBack() {
       const id = document.getElementById("gameOver");
       id.hidden = false;
-      
+
       // Use waitForRestart to wait for the restart button click
       await waitForButton('restartGame');
       id.hidden = true;
-      
+
       // Change currentLevel to start/restart value of null
       GameEnv.currentLevel = null;
 
@@ -154,16 +170,16 @@ image: /images/platformer/backgrounds/hills.png
     /*  ==========================================
      *  ========== Game Level setup ==============
      *  ==========================================
-     * Start/Homme sequence
+     * Start/Home sequence
      * a.) the start level awaits for button selection
      * b.) the start level automatically cycles to home level
-     * c.) the home advances to 1st game level when button selection is made
+     * c.) the home advances to the 1st game level when the button selection is made
     */
     // Start/Home screens
     new GameLevel( {tag: "start", callback: startGameCallback } );
     new GameLevel( {tag: "home", background: assets.backgrounds.start, callback: homeScreenCallback } );
     // Game screens
-    new GameLevel( {tag: "hills", background: assets.backgrounds.hills, platform: assets.platforms.grass, player: assets.players.mario, tube: assets.obstacles.tube, callback: testerCallBack } );
+    new GameLevel( {tag: "hills", background: assets.backgrounds.hills, platform: assets.platforms.grass, player: assets.players.mario, enemy: assets.enemies.goomba, tube: assets.obstacles.tube, callback: testerCallBack } );
     new GameLevel( {tag: "alien", background: assets.backgrounds.planet, platform: assets.platforms.alien, player: assets.players.monkey, callback: testerCallBack } );
     // Game Over screen
     new GameLevel( {tag: "end", background: assets.backgrounds.end, callback: gameOverCallBack } );
@@ -172,6 +188,39 @@ image: /images/platformer/backgrounds/hills.png
      *  ========== Game Control ==================
      *  ==========================================
     */
+
+    // Define the YouTube video ID
+const youtubeVideoId = 'KCiVG6mTor0';
+
+// Initialize the YouTube video player
+let youtubePlayer;
+function onYouTubeIframeAPIReady() {
+    youtubePlayer = new YT.Player('youtubePlayer', {
+        height: '0',
+        width: '0',
+        videoId: youtubeVideoId,
+        playerVars: {
+            autoplay: 1,
+            loop: 1,
+            controls: 0,
+            showinfo: 0,
+            mute: 0,
+        },
+        events: {
+            onReady: onPlayerReady
+        }
+    });
+}
+
+// Callback function when the YouTube player is ready
+function onPlayerReady(event) {
+    // Uncomment the following line if you want the video to start playing immediately
+    event.target.playVideo();
+}
+
+// Add the onYouTubeIframeAPIReady function to the global scope
+window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+
 
     // create listeners
     toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);

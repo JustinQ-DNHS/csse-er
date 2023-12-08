@@ -1,5 +1,5 @@
 import GameEnv from './GameEnv.js';
-
+import deathController from './Death.js';
 /* GameControl is an object literal.
  *   Informerly GameControl looks like defining a variable with methods.
  *   By definition GameControl is a singleton object, without a constructor.
@@ -28,6 +28,8 @@ const GameControl = {
         toggleCanvasEffect.dispatchEvent(new Event('click'));
 
         this.inTransition = false;
+
+        
     },
 
     // Game control loop
@@ -49,6 +51,11 @@ const GameControl = {
                         // transition to the next level
                         this.transitionToLevel(GameEnv.levels[currentIndex + 1]);
                     } 
+                }
+                if (deathController.getDeath() === 1) {
+                    const currentIndex = GameEnv.levels.indexOf(currentLevel);
+                    this.transitionToLevel(GameEnv.levels[currentIndex]);
+                    deathController.setDeath(0);
                 }
             // currentLevel is null, (ie start or restart game)
             } else {
