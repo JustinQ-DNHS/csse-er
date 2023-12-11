@@ -148,7 +148,7 @@ export class Player extends Character{
             this.movement.left = true;
             this.movement.right = true;
             this.movement.down = true;
-        }
+        };
         // Enemy collision
         if (this.collisionData.touchPoints.other.id === "enemy") {
             // Collision with the left side of the Enemy
@@ -165,7 +165,44 @@ export class Player extends Character{
                 this.y -= (this.bottom * .33);
                 this.collisionData.touchPoints.other.destroy();
             }
-        }
+        };
+        // Platform collision
+        if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
+            // Collision with the left side of the Platform
+            console.log("id")
+            if (this.collisionData.touchPoints.other.left && (this.topOfPlatform === true)) {
+                this.movement.right = false;
+                console.log("a")
+            }
+            // Collision with the right side of the platform
+            if (this.collisionData.touchPoints.other.right && (this.topOfPlatform === true)) {
+                this.movement.left = false;
+                console.log("b")
+            }
+            // Collision with the top of the player
+            if (this.collisionData.touchPoints.this.ontop) {
+                this.gravityEnabled = false;
+                console.log("c")
+            }
+            if (this.collisionData.touchPoints.this.bottom) {
+                this.gravityEnabled = false;
+                console.log("d")
+            }
+            if (this.collisionData.touchPoints.this.top) {
+                this.gravityEnabled = false;
+                this.topOfPlatform = true; 
+                console.log(this.topOfPlatform + "top")
+                console.log(this.gravityEnabled + "grav")
+                //console.log("e");
+            }
+        } else {
+            this.topOfPlatform = false;
+            this.movement.left = true;
+            this.movement.right = true;
+            this.movement.down = true;
+            this.gravityEnabled = true;
+        }; 
+        // The else statement above may be causing issues
     }
         
     // Event listener key down

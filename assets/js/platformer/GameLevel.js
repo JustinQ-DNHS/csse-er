@@ -12,6 +12,7 @@ class GameLevel {
         this.tag = gameObject?.tag;
         this.backgroundImg = gameObject.background?.file;
         this.platformImg = gameObject.platform?.file;
+        this.jumpPlatformImg = gameObject.jumpPlatform?.file;
         this.playerImg = gameObject.player?.file;
         this.playerData = gameObject?.player;
         this.enemyImg = gameObject.enemy?.file;
@@ -31,6 +32,9 @@ class GameLevel {
         }
         if (this.platformImg) {
             imagesToLoad.push(this.loadImage(this.platformImg));
+        }
+        if (this.jumpPlatformImg) {
+            imagesToLoad.push(this.loadImage(this.jumpPlatformImg));
         }
         if (this.playerImg) {
             imagesToLoad.push(this.loadImage(this.playerImg));
@@ -65,6 +69,16 @@ class GameLevel {
                 const platformSpeedRatio = 0;
                 new Platform(platformCanvas, loadedImages[i], platformSpeedRatio);
                 i++;
+            }
+
+            // JumpPlatform loader
+            if (this.jumpPlatformImg) {
+                const jumpPlatformCanvas = document.createElement("canvas")
+                jumpPlatformCanvas.id = "jumpPlatform"
+                const jumpPlatformSpeedRatio = 0;
+                document.querySelector("#canvasContainer").appendChild(backgroundCanvas);
+                new JumpPlatform(jumpPlatformCanvas, loadedImages[i], jumpPlatformSpeedRatio);
+                i++
             }
 
             // Prepare HTML with Player Canvas (if playerImg is defined)
