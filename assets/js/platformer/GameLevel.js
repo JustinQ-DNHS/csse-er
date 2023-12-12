@@ -4,6 +4,7 @@ import Platform from './Platform.js';
 import Player from './Player.js';
 import Tube from './Tube.js';
 import Enemy from './Enemy.js';
+import JumpPlatform from './JumpPlatform.js';
 
 // Store the assets and attributes of the Game at the specific GameLevel.
 class GameLevel {
@@ -76,7 +77,7 @@ class GameLevel {
                 const jumpPlatformCanvas = document.createElement("canvas")
                 jumpPlatformCanvas.id = "jumpPlatform"
                 const jumpPlatformSpeedRatio = 0;
-                document.querySelector("#canvasContainer").appendChild(backgroundCanvas);
+                document.querySelector("#canvasContainer").appendChild(jumpPlatformCanvas);
                 new JumpPlatform(jumpPlatformCanvas, loadedImages[i], jumpPlatformSpeedRatio);
                 i++
             }
