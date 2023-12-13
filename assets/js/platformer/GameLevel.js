@@ -5,6 +5,7 @@ import Player from './Player.js';
 import Tube from './Tube.js';
 import Enemy from './Enemy.js';
 import JumpPlatform from './JumpPlatform.js';
+import Coin from './Coin.js'
 
 // Store the assets and attributes of the Game at the specific GameLevel.
 class GameLevel {
@@ -14,6 +15,7 @@ class GameLevel {
         this.backgroundImg = gameObject.background?.file;
         this.platformImg = gameObject.platform?.file;
         this.jumpPlatformImg = gameObject.jumpPlatform?.file;
+        this.coinImg = gameObject.coinImg?.file;
         this.playerImg = gameObject.player?.file;
         this.playerData = gameObject?.player;
         this.enemyImg = gameObject.enemy?.file;
@@ -36,6 +38,9 @@ class GameLevel {
         }
         if (this.jumpPlatformImg) {
             imagesToLoad.push(this.loadImage(this.jumpPlatformImg));
+        }
+        if (this.coinImg) {
+            imagesToLoad.push(this.loadImage(this.coinImg));
         }
         if (this.playerImg) {
             imagesToLoad.push(this.loadImage(this.playerImg));
@@ -79,6 +84,15 @@ class GameLevel {
                 const jumpPlatformSpeedRatio = 0;
                 document.querySelector("#canvasContainer").appendChild(jumpPlatformCanvas);
                 new JumpPlatform(jumpPlatformCanvas, loadedImages[i], jumpPlatformSpeedRatio);
+                i++
+            }
+
+            if (this.coinImg) {
+                const coinCanvas = document.createElement("canvas");
+                coinCanvas.id = "coin";
+                const coinSpeedRatio = 0;
+                document.querySelector("#canvasContainer").appendChild(coinCanvas);
+                new Coin(coinCanvas, loadedImages[i], coinSpeedRatio);
                 i++
             }
 

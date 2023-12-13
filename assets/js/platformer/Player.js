@@ -204,6 +204,23 @@ export class Player extends Character{
                 this.collisionData.touchPoints.other.destroy();
             }
         };
+        /* Code below was provded for adding a hitbox to the coin.
+        else {
+            if (this.collisionData.touchPoints.other.id === "thing2") {
+            // Collision with the left side of the Tub
+            if (this.collisionData.touchPoints.coin.left) {
+                this.touchCoin = true;
+                console.log("o")
+                window.location.reload();
+            }
+            // Collision with the right side of the Tube
+            if (this.collisionData.touchPoints.coin.right) {
+                console.log("p")
+                this.touchCoin = true;
+                window.location.reload();
+            }
+        }  
+        */
     }
         
     // Event listener key down
