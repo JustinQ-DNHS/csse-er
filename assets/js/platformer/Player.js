@@ -112,7 +112,7 @@ export class Player extends Character{
             if (this.movement.right) this.x += this.speed;  // Move to right
         }
         if (this.isGravityAnimation("w")) {
-            if (this.movement.down) this.y -= (this.bottom * .33);  // jump 33% higher than bottom
+            if (this.movement.down) this.y -= (this.bottom * .50);  // jump 33% higher than bottom
         } 
 
         //Prevents Player from leaving screen
@@ -149,35 +149,18 @@ export class Player extends Character{
             this.movement.right = true;
             this.movement.down = true;
         };
-        // Enemy collision
-        if (this.collisionData.touchPoints.other.id === "enemy") {
-            // Collision with the left side of the Enemy
-            if (this.collisionData.touchPoints.other.left) {
-                deathController.setDeath(1);
-            }
-            // Collision with the right side of the Enemy
-            if (this.collisionData.touchPoints.other.right) {
-                deathController.setDeath(1);
-            }
-            // Collision with the top of the Enemy
-            if (this.collisionData.touchPoints.other.ontop) {
-                console.log("Bye Goomba");
-                this.y -= (this.bottom * .33);
-                this.collisionData.touchPoints.other.destroy();
-            }
-        };
+        // *******************************
         // Platform collision
         if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
             // Collision with the left side of the Platform
-            console.log("id")
             if (this.collisionData.touchPoints.other.left && (this.topOfPlatform === true)) {
                 this.movement.right = false;
-                console.log("a")
+                console.log("platform left")
             }
             // Collision with the right side of the platform
             if (this.collisionData.touchPoints.other.right && (this.topOfPlatform === true)) {
                 this.movement.left = false;
-                console.log("b")
+                console.log("platform right")
             }
             // Collision with the top of the player
             if (this.collisionData.touchPoints.this.ontop) {
@@ -197,12 +180,30 @@ export class Player extends Character{
             }
         } else {
             this.topOfPlatform = false;
-            this.movement.left = true;
-            this.movement.right = true;
-            this.movement.down = true;
             this.gravityEnabled = true;
-        }; 
+            /* this.movement.left = true;
+            this.movement.right = true;
+            this.movement.down = true; */
+        };
         // The else statement above may be causing issues
+        // *******************************
+        // Enemy collision
+        if (this.collisionData.touchPoints.other.id === "enemy") {
+            // Collision with the left side of the Enemy
+            if (this.collisionData.touchPoints.other.left) {
+                deathController.setDeath(1);
+            }
+            // Collision with the right side of the Enemy
+            if (this.collisionData.touchPoints.other.right) {
+                deathController.setDeath(1);
+            }
+            // Collision with the top of the Enemy
+            if (this.collisionData.touchPoints.other.ontop) {
+                console.log("Bye Goomba");
+                this.y -= (this.bottom * .33);
+                this.collisionData.touchPoints.other.destroy();
+            }
+        };
     }
         
     // Event listener key down
