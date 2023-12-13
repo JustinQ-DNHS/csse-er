@@ -15,7 +15,7 @@ class GameLevel {
         this.backgroundImg = gameObject.background?.file;
         this.platformImg = gameObject.platform?.file;
         this.jumpPlatformImg = gameObject.jumpPlatform?.file;
-        this.coinImg = gameObject.coinImg?.file;
+        this.coinImg = gameObject.coin?.file;
         this.playerImg = gameObject.player?.file;
         this.playerData = gameObject?.player;
         this.enemyImg = gameObject.enemy?.file;
@@ -79,21 +79,22 @@ class GameLevel {
 
             // JumpPlatform loader
             if (this.jumpPlatformImg) {
-                const jumpPlatformCanvas = document.createElement("canvas")
-                jumpPlatformCanvas.id = "jumpPlatform"
+                const jumpPlatformCanvas = document.createElement("canvas");
+                jumpPlatformCanvas.id = "jumpPlatform";
                 const jumpPlatformSpeedRatio = 0;
                 document.querySelector("#canvasContainer").appendChild(jumpPlatformCanvas);
                 new JumpPlatform(jumpPlatformCanvas, loadedImages[i], jumpPlatformSpeedRatio);
-                i++
+                i++;
             }
 
+            // Coin loader
             if (this.coinImg) {
                 const coinCanvas = document.createElement("canvas");
                 coinCanvas.id = "coin";
                 const coinSpeedRatio = 0;
                 document.querySelector("#canvasContainer").appendChild(coinCanvas);
                 new Coin(coinCanvas, loadedImages[i], coinSpeedRatio);
-                i++
+                i++;
             }
 
             // Prepare HTML with Player Canvas (if playerImg is defined)
@@ -105,6 +106,7 @@ class GameLevel {
                 new Player(playerCanvas, loadedImages[i], playerSpeedRatio, this.playerData);
                 i++;
             }
+
             if (this.enemyImg) {
                 const enemyCanvas = document.createElement("canvas");
                 enemyCanvas.id = "enemy"

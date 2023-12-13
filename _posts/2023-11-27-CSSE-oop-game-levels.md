@@ -59,7 +59,7 @@ image: /images/platformer/backgrounds/hills.png
       },
       coins: {
         gold_coin: {src: "/images/platformer/sprites/Coin.png"}
-      }
+      },
       backgrounds: {
         start: { src: "/images/platformer/backgrounds/home.png" },
         hills: { src: "/images/platformer/backgrounds/hills.png" },
