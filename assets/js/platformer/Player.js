@@ -5,7 +5,7 @@ import Enemy from './Enemy.js';
 
 export class Player extends Character{
     // constructors sets up Character object 
-    constructor(canvas, image, speedRatio, playerData){
+    constructor(canvas, image, speedRatio, playerData, speedLimit){
         super(canvas, 
             image, 
             speedRatio,
@@ -30,6 +30,12 @@ export class Player extends Character{
         // Add event listeners
         document.addEventListener('keydown', this.keydownListener);
         document.addEventListener('keyup', this.keyupListener);
+        
+        // Speed Limit, remove if necessary
+        this.speedLimit = speedLimit;
+        this.currentspeed = 0;
+        this.acceleration = 0.11; 
+        this.deceleration = 0.1;
 
         GameEnv.player = this;
     }
@@ -120,6 +126,39 @@ export class Player extends Character{
             this.x += 5
         }
 
+        // Beginning of the additions by the Animation team
+        // Speed Limit forcer, remove if necessary
+        if (Math.abs(this.currentSpeed) > this.speedLimit) {
+            this.currentSpeed= this.currentSpeed > 0 ? this.speedLimit : - this.speedLimit;
+        }
+        // Second part of speed limit
+        this.x += this.currentSpeed;
+        // Speed Thresholds
+        const walkingSpeedThreshold = 1; // Walking speed threshold
+        const runningSpeedThreshold = 5; // Running speed threshold
+        // End lesson additions
+        // More lesson additons
+        if (Math.abs(this.currentSpeed) >= runningSpeedThreshold) {
+            // Change sprite sheet row for running
+            if (this.currentSpeed > 0) {
+            this.setFrameY(this.playerData.runningRight.row);
+            } else {
+                this.setFrameY(this.playerData.runningLeft.row);
+            }
+        } else if (Math.abs(this.currentSpeed) >= walkingSpeedThreshold) {
+            // Change sprite sheet row for walking
+            if (this.currentSpeed > 0) {
+                this.setFrameY(this.playerData.d.row);
+            } else {
+                this.setFrameY(this.playerData.a.row);
+            }
+            } else {
+            // Revert to normal animation if speed is below the walking threshold
+            this.setFrameY(this.playerData.idle.row);
+            }
+        // the super.update is part of the original code   
+        //End of additions by animation team
+        
         // Perform super update actions
         super.update();
     }
