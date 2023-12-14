@@ -5,7 +5,7 @@ import Enemy from './Enemy.js';
 
 export class Player extends Character{
     // constructors sets up Character object 
-    constructor(canvas, image, speedRatio, playerData, speedLimit){
+    constructor(canvas, image, speedRatio, playerData, speedLimit) {
         super(canvas, 
             image, 
             speedRatio,
@@ -31,11 +31,13 @@ export class Player extends Character{
         document.addEventListener('keydown', this.keydownListener);
         document.addEventListener('keyup', this.keyupListener);
         
+        /*// Begin additions from animation lessons
         // Speed Limit, remove if necessary
         this.speedLimit = speedLimit;
         this.currentspeed = 0;
         this.acceleration = 0.11; 
         this.deceleration = 0.1;
+        //End additons from animation lessons*/
 
         GameEnv.player = this;
     }
@@ -76,7 +78,7 @@ export class Player extends Character{
     
         // verify key is in active animations
         if (key in this.pressedKeys) {
-            result = (!this.isIdle && this.bottom <= this.y);
+            result = (!this.isIdle && (this.topOfPlatform || this.bottom <= this.y));
         }
 
         // scene for on top of tube animation
@@ -111,6 +113,7 @@ export class Player extends Character{
 
     // Player updates
     update() {
+        // Original movement code VVV
         if (this.isAnimation("a")) {
             if (this.movement.left) this.x -= this.speed;  // Move to left
         }
@@ -119,14 +122,26 @@ export class Player extends Character{
         }
         if (this.isGravityAnimation("w")) {
             if (this.movement.down) this.y -= (this.bottom * .33);  // jump 33% higher than bottom
-        } 
+        }
+        
+        /* // More stuff from the animation lesson
+        // Adjust speed based on pressed keys
+        if (this.pressedKeys['a'] && this.movement.left) {
+            this.currentSpeed -= this.acceleration;
+        } else if (this.pressedKeys['d'] && this.movement.right) {
+            this.currentSpeed += this.acceleration;
+        } else {
+            // Decelerate when no movement keys are pressed
+            this.currentSpeed *= (1 - this.deceleration);
+        }
+        // End stuff from animation lesson */
 
         //Prevents Player from leaving screen
         if (this.x <= 0) {
             this.x += 5
         }
 
-        // Beginning of the additions by the Animation team
+        /* // Beginning of the additions by the Animation team
         // Speed Limit forcer, remove if necessary
         if (Math.abs(this.currentSpeed) > this.speedLimit) {
             this.currentSpeed= this.currentSpeed > 0 ? this.speedLimit : - this.speedLimit;
@@ -137,6 +152,7 @@ export class Player extends Character{
         const walkingSpeedThreshold = 1; // Walking speed threshold
         const runningSpeedThreshold = 5; // Running speed threshold
         // End lesson additions
+
         // More lesson additons
         if (Math.abs(this.currentSpeed) >= runningSpeedThreshold) {
             // Change sprite sheet row for running
@@ -157,7 +173,7 @@ export class Player extends Character{
             this.setFrameY(this.playerData.idle.row);
             }
         // the super.update is part of the original code   
-        //End of additions by animation team
+        //End of additions by animation team */
         
         // Perform super update actions
         super.update();
@@ -240,7 +256,7 @@ export class Player extends Character{
             if (this.collisionData.touchPoints.other.ontop) {
                 console.log("Bye Goomba");
                 this.y -= (this.bottom * .33);
-                this.collisionData.touchPoints.other.destroy();
+                deathController.setDeath(1);
             }
         };
         /* Code below was provded for adding a hitbox to the coin.
