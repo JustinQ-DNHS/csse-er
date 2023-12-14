@@ -5,13 +5,15 @@ import Player from './Player.js';
 import Tube from './Tube.js';
 import Enemy from './Enemy.js';
 import JumpPlatform from './JumpPlatform.js';
-import Coin from './Coin.js'
+import Coin from './Coin.js';
+import Backbackground from './Backbackground.js';
 
 // Store the assets and attributes of the Game at the specific GameLevel.
 class GameLevel {
     constructor(gameObject) {
         // conditional assignments from GameObject to instance variables
         this.tag = gameObject?.tag;
+        this.backbackgroundImg = gameObject.backbackground?.file;
         this.backgroundImg = gameObject.background?.file;
         this.platformImg = gameObject.platform?.file;
         this.jumpPlatformImg = gameObject.jumpPlatform?.file;
@@ -30,6 +32,9 @@ class GameLevel {
         
         // test for presence of Images
         const imagesToLoad = [];
+        if (this.backbackgroundImg) {
+            imagesToLoad.push(this.loadImage(this.backbackgroundImg));
+        }
         if (this.backgroundImg) {
             imagesToLoad.push(this.loadImage(this.backgroundImg));
         }
@@ -58,6 +63,15 @@ class GameLevel {
             var i = 0;
 
             // Prepare HTML with Background Canvas (if backgroundImg is defined)
+            if (this.backbackgroundImg) {
+                const backbackgroundCanvas = document.createElement("canvas");
+                backgroundCanvas.id = "background";
+                document.querySelector("#canvasContainer").appendChild(backbackgroundCanvas);
+                const backbackgroundSpeedRatio = 0;
+                new Backbackground(backbackgroundCanvas, loadedImages[i], backbackgroundSpeedRatio);
+                i++;
+            }
+
             if (this.backgroundImg) {
                 const backgroundCanvas = document.createElement("canvas");
                 backgroundCanvas.id = "background";
