@@ -102,7 +102,7 @@ class GameLevel {
                 const playerCanvas = document.createElement("canvas");
                 playerCanvas.id = "character";
                 document.querySelector("#canvasContainer").appendChild(playerCanvas);
-                const playerSpeedRatio = 0.7;
+                const playerSpeedRatio = 2;
                 new Player(playerCanvas, loadedImages[i], playerSpeedRatio, this.playerData);
                 i++;
             }
