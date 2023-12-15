@@ -12,6 +12,30 @@ image: /images/platformer/backgrounds/hills.png
         position: relative;
         z-index: 2; /*Ensure the controls are on top*/
     }
+
+    #toggleCanvasEffect, #background, #foreground, #platform {
+      animation: fadein 1s;
+    }
+
+    #startGame {
+      animation: flash 0.5s infinite;
+    }
+
+    @keyframes flash {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeout {
+      from {opacity: 1}
+      to {opacity: 0}
+    }
+
+    @keyframes fadein {
+      from {opacity: 0}
+      to {opacity: 1}
+    }
 </style>
 
 <!-- Load the YouTube Iframe API script -->
