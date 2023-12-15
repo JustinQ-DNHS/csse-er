@@ -16,6 +16,8 @@ const GameControl = {
 
         // Destroy existing game objects
         GameEnv.destroy();
+        GameEnv.foregroundSpeed = 0;
+        GameEnv.backgroundSpeed = 0;
 
         // Load GameLevel objects
         await newLevel.load();
