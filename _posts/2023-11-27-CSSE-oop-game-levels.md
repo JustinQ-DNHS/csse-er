@@ -61,12 +61,12 @@ image: /images/platformer/backgrounds/hills.png
         gold_coin: {src: "/images/platformer/sprites/Coin.png"}
       },
       backgrounds: {
-        mountains: { src: "/images/platformer/platforms/mountain.jpg" },
         start: { src: "/images/platformer/backgrounds/home.png" },
         hills: { src: "/images/platformer/backgrounds/hills.png" },
         planet: { src: "/images/platformer/backgrounds/planet.jpg" },
         castles: { src: "/images/platformer/backgrounds/castles.png" },
-        end: { src: "/images/platformer/backgrounds/game_over.png" }
+        mountains: { src: "/images/platformer/backgrounds/mountains.jpg" },
+        end: { src: "/images/platformer/backgrounds/game_over.png" },
       },
       players: {
         mario: {
@@ -198,12 +198,12 @@ image: /images/platformer/backgrounds/hills.png
     */
     // Start/Home screens
     new GameLevel( {tag: "start", callback: startGameCallback } );
-    new GameLevel( {tag: "home", background: assets.backgrounds.start, callback: homeScreenCallback } );
+    new GameLevel( {tag: "home", foreground: assets.backgrounds.start, callback: homeScreenCallback } );
     // Game screens
-    new GameLevel( {tag: "hills", backbackgrounds: assets.backgrounds.mountains, background: assets.backgrounds.hills, platform: assets.platforms.grass, jumpPlatform: assets.jumpPlatforms.brick, coin: assets.coins.gold_coin, player: assets.players.mario, enemy: assets.enemies.goomba, tube: assets.obstacles.tube, callback: testerCallBack } );
-    new GameLevel( {tag: "alien", background: assets.backgrounds.planet, platform: assets.platforms.alien, player: assets.players.monkey, callback: testerCallBack } );
+    new GameLevel( {tag: "hills", foreground: assets.backgrounds.hills, platform: assets.platforms.grass, jumpPlatform: assets.jumpPlatforms.brick, coin: assets.coins.gold_coin, player: assets.players.mario, enemy: assets.enemies.goomba, tube: assets.obstacles.tube, callback: testerCallBack } );
+    new GameLevel( {tag: "alien", foreground: assets.backgrounds.planet, platform: assets.platforms.alien, player: assets.players.monkey, callback: testerCallBack } );
     // Game Over screen
-    new GameLevel( {tag: "end", background: assets.backgrounds.end, callback: gameOverCallBack } );
+    new GameLevel( {tag: "end", foreground: assets.backgrounds.end, callback: gameOverCallBack } );
 
     /*  ==========================================
      *  ========== Game Control ==================
@@ -211,7 +211,7 @@ image: /images/platformer/backgrounds/hills.png
     */
 
     // Define the YouTube video ID
-const youtubeVideoId = 'NTa6Xbzfq1U';
+const youtubeVideoId = '3ijDdxmoiX0';
 
 // Initialize the YouTube video player
 let youtubePlayer;

@@ -4,8 +4,9 @@ export class GameEnv {
     static player = null;
     static levels = [];
     static gameObjects = [];
-
+    
     // game attributes
+    static foregroundSpeed = 0;
     static gameSpeed = 2;
     static gravity = 3;
     static innerWidth;
@@ -17,7 +18,7 @@ export class GameEnv {
     static floor;
     static prevFloor;
     // calculated size properties
-    static backgroundHeight = 0;
+    static foregroundHeight = 0;
     static platformHeight = 0;
 
     // canvas filter property
@@ -49,7 +50,7 @@ export class GameEnv {
     static setBottom() {
         // sets the bottom or gravity 0
         this.bottom =
-        this.top + this.backgroundHeight;
+        this.top + this.foregroundHeight;
     }
 
     // Setup for Game Environment 
