@@ -8,9 +8,22 @@ image: /images/platformer/backgrounds/hills.png
 ---
 
 <style>
-    #gameBegin, #controls, #gameOver {
-        position: relative;
+    #gameBegin, #controls, #gameOver, #settings {
+      position: relative;
         z-index: 2; /*Ensure the controls are on top*/
+    }
+
+    .sidenav {
+      position: fixed;
+      height: 100%; /* 100% Full-height */
+      width: 0px; /* 0 width - change this with JavaScript */
+      z-index: 3; /* Stay on top */
+      top: 0; /* Stay at the top */
+      left: 0;
+      overflow-x: hidden; /* Disable horizontal scroll */
+      padding-top: 60px; /* Place content 60px from the top */
+      transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+      background-color: black; 
     }
 
     #toggleCanvasEffect, #background, #foreground, #platform {
@@ -46,6 +59,10 @@ image: /images/platformer/backgrounds/hills.png
 <div id="canvasContainer">
     <!-- Add this div to contain the YouTube video player -->
     <div id="youtubePlayer"></div>
+    <div id="mySidebar" class="sidenav">
+      <a href="javascript:void(0)" id="toggleSettingsBar1" class="closebtn">&times;</a>
+    </div>
+    <div id="canvasContainer">
     <div id="gameBegin" hidden>
         <button id="startGame">Start Game</button>
     </div>
@@ -53,8 +70,13 @@ image: /images/platformer/backgrounds/hills.png
         <!-- Background controls -->
         <button id="toggleCanvasEffect">Invert</button>
     </div>
+    <div id="settings"> <!-- Controls -->
+        <!-- Background controls -->
+        <button id="toggleSettingsBar">Settings</button>
+    </div>
     <div id="gameOver" hidden>
         <button id="restartGame">Restart</button>
+    </div>
     </div>
 </div>
 
@@ -63,6 +85,9 @@ image: /images/platformer/backgrounds/hills.png
     import GameEnv from '{{site.baseurl}}/assets/js/platformer/GameEnv.js';
     import GameLevel from '{{site.baseurl}}/assets/js/platformer/GameLevel.js';
     import GameControl from '{{site.baseurl}}/assets/js/platformer/GameControl.js';
+    import Controller from '/csse-er/assets/js/platformer/Controller.js';
+
+    var myController = new Controller();
 
     /*  ==========================================
      *  ======= Data Definitions =================
@@ -267,11 +292,25 @@ function onPlayerReady(event) {
 window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 
 
-    // create listeners
-    toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
-    window.addEventListener('resize', GameEnv.resize);
+  // create listeners
+  toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
+  window.addEventListener('resize', GameEnv.resize);
 
-    // start game
-    GameControl.gameLoop();
+  // start game
+  GameControl.gameLoop();
+    
+  // Initialize Local Storage
+  myController.initialize();
+    
+  var table = myController.levelTable;
+    document.getElementById("mySidebar").append(table);
 
+  var toggle = false;
+    function toggleWidth(){
+      toggle = !toggle;
+      document.getElementById("mySidebar").style.width = toggle?"250px":"0px";
+    }
+    document.getElementById("toggleSettingsBar").addEventListener("click",toggleWidth);
+    document.getElementById("toggleSettingsBar1").addEventListener("click",toggleWidth);
+    
 </script>
