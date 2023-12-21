@@ -5,7 +5,7 @@ import Enemy from './Enemy.js';
 
 export class Player extends Character{
     // constructors sets up Character object 
-    constructor(canvas, image, speedRatio, playerData, speedLimit) {
+    constructor(canvas, image, speedRatio, playerData) {
         super(canvas, 
             image, 
             speedRatio,
@@ -14,6 +14,8 @@ export class Player extends Character{
         );
         // Player Data is required for Animations
         this.playerData = playerData;
+        this.dashTimer = 0;
+        this.cooldownTimer = 0;
 
         this.spriteScale = 1;
 
@@ -113,68 +115,28 @@ export class Player extends Character{
 
     // Player updates
     update() {
-        // Original movement code VVV
         if (this.isAnimation("a")) {
-            if (this.movement.left) this.x -= this.speed;  // Move to left
-        }
+                if (this.movement.left) this.x -= this.speed;  // Move to left
+                this.facingLeft = true; // Add this!
+            }
         if (this.isAnimation("d")) {
             if (this.movement.right) this.x += this.speed;  // Move to right
+            this.facingLeft = false; // Add this!
         }
+        if (this.isAnimation("s")) {
+            if (this.movement) {  // Check if movement is allowed
+                if(this.dashTimer){
+                    const moveSpeed = this.speed * 2;
+                    this.x += this.facingLeft ? -moveSpeed : moveSpeed;
+                }
+            }
+        };
         if (this.isGravityAnimation("w")) {
             if (this.movement.down) this.y -= (this.bottom * .33);  // jump 33% higher than bottom
         }
-        
-        /* // More stuff from the animation lesson
-        // Adjust speed based on pressed keys
-        if (this.pressedKeys['a'] && this.movement.left) {
-            this.currentSpeed -= this.acceleration;
-        } else if (this.pressedKeys['d'] && this.movement.right) {
-            this.currentSpeed += this.acceleration;
-        } else {
-            // Decelerate when no movement keys are pressed
-            this.currentSpeed *= (1 - this.deceleration);
-        }
-        // End stuff from animation lesson */
-
-        //Prevents Player from leaving screen
         if (this.x <= 0) {
             this.x += 5
         }
-
-        /* // Beginning of the additions by the Animation team
-        // Speed Limit forcer, remove if necessary
-        if (Math.abs(this.currentSpeed) > this.speedLimit) {
-            this.currentSpeed= this.currentSpeed > 0 ? this.speedLimit : - this.speedLimit;
-        }
-        // Second part of speed limit
-        this.x += this.currentSpeed;
-        // Speed Thresholds
-        const walkingSpeedThreshold = 1; // Walking speed threshold
-        const runningSpeedThreshold = 5; // Running speed threshold
-        // End lesson additions
-
-        // More lesson additons
-        if (Math.abs(this.currentSpeed) >= runningSpeedThreshold) {
-            // Change sprite sheet row for running
-            if (this.currentSpeed > 0) {
-            this.setFrameY(this.playerData.runningRight.row);
-            } else {
-                this.setFrameY(this.playerData.runningLeft.row);
-            }
-        } else if (Math.abs(this.currentSpeed) >= walkingSpeedThreshold) {
-            // Change sprite sheet row for walking
-            if (this.currentSpeed > 0) {
-                this.setFrameY(this.playerData.d.row);
-            } else {
-                this.setFrameY(this.playerData.a.row);
-            }
-            } else {
-            // Revert to normal animation if speed is below the walking threshold
-            this.setFrameY(this.playerData.idle.row);
-            }
-        // the super.update is part of the original code   
-        //End of additions by animation team */
-        
         // Perform super update actions
         super.update();
     }
@@ -296,6 +258,21 @@ export class Player extends Character{
                 GameEnv.backgroundSpeed = 0.5;
                 GameEnv.foregroundSpeed = 0.4; // Caused issues so was removed
             }
+            if (event.key === "s") {
+                //previous code
+    
+                this.dashTimer = setTimeout(() => {
+                    // Stop the player's running functions
+                    clearTimeout(this.dashTimer);
+                    this.dashTimer = null;
+    
+                    // Start cooldown timer
+                    this.cooldownTimer = setTimeout(() => {
+                        clearTimeout(this.cooldownTimer);
+                        this.cooldownTimer = null;
+                    }, 4000);
+                }, 1000);
+            }
         }
     }
 
@@ -313,6 +290,9 @@ export class Player extends Character{
             if (key === "d") {
                 GameEnv.backgroundSpeed = 0;
                 GameEnv.foregroundSpeed = 0; // Caused issues so was removed
+            }
+            if (event.key === "s") {
+                this.canvas.style.filter = 'invert(0)'; //revert to default coloring
             }
             this.setAnimation(key);  
             // player idle
