@@ -67,6 +67,7 @@ export class Controller extends LocalStorage{
 
         return t; //returns <table> element
     }
+    
     get speedDiv(){
         var div = document.createElement("div"); //container
 
