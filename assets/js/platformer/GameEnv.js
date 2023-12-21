@@ -111,6 +111,7 @@ export class GameEnv {
     }
 };
 
+// Leaderboard Team
 let time = 0; // Initialize time variable
 let timerInterval; // Variable to hold the interval reference
 
