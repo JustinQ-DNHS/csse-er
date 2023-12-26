@@ -258,9 +258,8 @@ export class Player extends Character{
                 GameEnv.backgroundSpeed = 0.5;
                 GameEnv.foregroundSpeed = 0.4; // Caused issues so was removed
             }
-            if (event.key === "s") {
-                //previous code
-    
+            if (key === "s") {
+                this.canvas.style.filter = 'invert(1)';
                 this.dashTimer = setTimeout(() => {
                     // Stop the player's running functions
                     clearTimeout(this.dashTimer);
@@ -291,7 +290,7 @@ export class Player extends Character{
                 GameEnv.backgroundSpeed = 0;
                 GameEnv.foregroundSpeed = 0; // Caused issues so was removed
             }
-            if (event.key === "s") {
+            if (key === "s") {
                 this.canvas.style.filter = 'invert(0)'; //revert to default coloring
             }
             this.setAnimation(key);  
