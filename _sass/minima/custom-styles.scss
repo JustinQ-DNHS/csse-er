@@ -18,8 +18,9 @@
 // If you want to turn off dark background for syntax highlighting, comment or delete the below line.
 // If you want to use dark themes uncomment out the following lines
 @import "minima/Nighthawkpages-dracula-highlight"; 
-@import "minima/Dark_Mode"; // Dracula Highlight recommended for dark mode
-@import "minima/student-styles";
+@import "minima/dark-mode"; // Dracula Highlight recommended for dark mode
+@import "minima/platformer-styles"; 
+@import "minima/teacher-styles"; 
 
 // FOR HAMILTON
 // @import "minima/hamilton/skins/daylight";

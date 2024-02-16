@@ -1,18 +1,18 @@
-$high-emph: rgba(whitesmoke, 0.87);
+:root {
+    --default-canvas-filter: invert(100%);
+}
+
+$high-emph: rgba(white, 0.87);
 $med-emph: rgba(white, 0.69); 
 $low-emph: rgba(white, 0.38);
-$dark-grey : #202020; 
+$dark-grey : #121212; 
 // $dark-grey : #1F1B24;
 $overlay: mix($dark-grey, white, 95%);
 $overlay-light: mix($dark-grey, white, 86%);
 
-html, body, input, textarea, select {   
+html, body, input, textarea, select, button {   
   color: $high-emph !important;
   background-color: $dark-grey !important;
-}
-button {
-    color: $high-emph ;
-    background-color: $dark-grey;
 }
 
 a {
@@ -82,7 +82,7 @@ table td{
 }
 
 canvas {
-    filter: invert(100%);
+    filter: var(--default-canvas-filter);
 }
 
 .post-list > li > div {
