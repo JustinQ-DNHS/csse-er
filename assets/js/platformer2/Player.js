@@ -1,8 +1,7 @@
     import GameEnv from './GameEnv.js';
     import Character from './Character.js';
     import GameControl from './GameControl.js';
-    import playJump from './Audio1.js';
-    import playPlayerDeath from './Audio2.js';
+    import playSounds from './Audio.js';
     import Socket from './Multiplayer.js';
 
     /**
@@ -84,7 +83,7 @@
                 if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
                     this.canvas.style.transition = "transform 0.5s";
                     this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
-                    playPlayerDeath();
+                    playSounds.playPlayerDeath();
 
                     if (this.isDying == false) {
                         this.isDying = true;
@@ -160,7 +159,7 @@
 
             // Player jumping
             if (this.isActiveGravityAnimation("w")) {
-                playJump();
+                playSounds.playJump();
                 if (this.gravityEnabled) {
                     // Vertical jump height calculation
                     let verticalJumpHeight;
