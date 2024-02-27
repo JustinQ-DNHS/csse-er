@@ -16,6 +16,7 @@ import Goomba from './Goomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
 import BlockPlatform from './BlockPlatform.js';
 import Mushroom from './Mushroom.js';
+import Spikes from './Spikes.js';
 import Coin from './Coin.js';
 
 
@@ -170,7 +171,11 @@ const GameSetup = {
       obstacles: {
         tube: { src: "/images/platformer/obstacles/tube.png" },
         coin: { src: "/images/platformer/obstacles/coin.png"},
-        tree: { src: "/images/platformer/obstacles/tree.png"}
+        tree: { src: "/images/platformer/obstacles/tree.png"},
+        spikesU: { src: "/images/platformer/obstacles/spikesU.png"},
+        spikesD: { src: "/images/platformer/obstacles/spikesD.png"},
+        spikesR: { src: "/images/platformer/obstacles/spikesR.png"},
+        spikesL: { src: "/images/platformer/obstacles/spikesL.png"}
       },
       platforms: {
         grass: { src: "/images/platformer/platforms/grass.png" },
@@ -186,7 +191,8 @@ const GameSetup = {
           height: 204,
           scaleSize: 80,
           speedRatio: 0.7,
-        }
+        },
+        castle: { src: "/images/platformer/platforms/castleFloor.jpg" }
       },
       backgrounds: {
         start: { src: "/images/platformer/backgrounds/home.png" },
@@ -195,6 +201,7 @@ const GameSetup = {
         mountains: { src: "/images/platformer/backgrounds/mountains.jpg" },
         clouds : { src: "/images/platformer/backgrounds/clouds.png"},
         space: { src: "/images/platformer/backgrounds/planet.jpg" },
+        bowser: { src: "/images/platformer/backgrounds/bowserCastle.jpg" },
         castles: { src: "/images/platformer/backgrounds/castles.png" },
         loading: { src: "/images/platformer/backgrounds/greenscreen.png" },
         complete: { src: "/images/platformer/backgrounds/OneStar.png" },
@@ -411,6 +418,72 @@ const GameSetup = {
         ];
         // Space Game Level added to the GameEnv ...
         new GameLevel( {tag: "space", callback: this.playerOffScreenCallBack, objects: spaceGameObjects} );
+
+        const bowserGameObjects = [
+          //GameObjects, the order is important to z-axis
+          { name: 'bowser', id: 'background', class: Background, data: this.assets.backgrounds.bowser },
+          { name: 'stoneBricks', id: 'platform', class: Platform, data: this.assets.platforms.castle },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 1 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.91 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.82 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.73 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.55 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.58, yPercentage: 1 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.58, yPercentage: 0.91 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.58, yPercentage: 0.82 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.58, yPercentage: 0.73 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.58, yPercentage: 0.64 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.66, yPercentage: 0.82 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.66, yPercentage: 0.73 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.66, yPercentage: 0.64 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.66, yPercentage: 0.55 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.28, yPercentage: 0.88 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.28, yPercentage: 0.79 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.28, yPercentage: 0.70 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.28, yPercentage: 0.61 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.28, yPercentage: 0.52 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.36, yPercentage: 0.88 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.395, yPercentage: 0.88 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.395, yPercentage: 0.79 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.395, yPercentage: 0.70 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.395, yPercentage: 0.61 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.395, yPercentage: 0.52 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.47, yPercentage: 0.88 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.505, yPercentage: 0.88 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.505, yPercentage: 0.79 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.505, yPercentage: 0.70 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.505, yPercentage: 0.61 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.505, yPercentage: 0.52 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.77, yPercentage: 1 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.77, yPercentage: 0.91 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.77, yPercentage: 0.82 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.77, yPercentage: 0.73 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.77, yPercentage: 0.55 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.735, yPercentage: 0.73 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.735, yPercentage: 0.82 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.2515, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.2915, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.3315, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.3715, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.4115, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.4515, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.4915, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.5315, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.5715, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.6115, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.6515, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.6915, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.7315, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.7715, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.8115, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.8515, yPercentage: 0.5 },
+          { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.8915, yPercentage: 0.5 },
+          { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.5, minPosition: 0.2 },
+          { name: 'mario', id: 'player', class: Player, data: this.assets.players.mario },
+          { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+        ];
+        // Add bowser level to the GameEnv
+        new GameLevel( {tag: "bowser", callback: this.playerOffScreenCallBack, objects: bowserGameObjects} );
 
         // Game Over Level definition...
         const endGameObjects = [
