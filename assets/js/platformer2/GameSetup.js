@@ -306,39 +306,6 @@ const GameSetup = {
             this.assets[category][item]['file'] = path + this.assets[category][item].src;
             });
         });
-
-        var fun_facts = {
-          //data structure
-          "Fun Fact #1" : "Mario's full name is Mario Mario.", //key and value
-          "Fun Fact #2" : "Mario's least favorite food is shittake mushrooms.", //single quotes to include the double quotes
-          "Fun Fact #3" : "Mario, in human years, is 24-25 years old.",
-          "Fun Fact #4" : "Mario's girlfriend's name is Pauline.",
-          "Fun Fact #5" : "Call or text 929-55-MARIO (929-556-2746) to get a fun suprise!",
-          "Fun Fact #6" : "Mario's original name was Jumpman.",
-          "Fun Fact #7" : "March 10th is known as Mario Day because the abbreviation for March 10th (Mar10) looks like Mario.",
-          "Fun Fact #8" : " Mario was originally a carpenter, not a plumber.",
-          "Fun Fact #9" : " There are actually lyrics to the Mario theme song."
-          }
-        function generate(){
-          var nums = Object.keys(fun_facts);
-          //console.log(nums);
-          var num = nums[Math.floor(Math.random()*nums.length)]
-          var fun_fact = fun_facts[num]; //using dictionary
-          //access ids
-          document.getElementById("fun_fact").innerHTML = fun_fact;
-          document.getElementById("num").innerHTML = num;
-          }
-    
-        let k = 0;
-        let interval2 = setInterval(() => 
-        {
-        generate();
-        k++;
-        if(k == fun_facts.length)
-        {
-          clearInterval(interval2);
-        }
-        }, 3000);
       
         // Home screen added to the GameEnv ...
         new GameLevel( {tag: "start", callback: this.startGameCallback } );
@@ -479,6 +446,8 @@ const GameSetup = {
           { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.8515, yPercentage: 0.5 },
           { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.8915, yPercentage: 0.5 },
           { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.5, minPosition: 0.2 },
+          // { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.65, minPosition: 0.55 },
+          // Screw this Goomba, made it almost impossible
           { name: 'mario', id: 'player', class: Player, data: this.assets.players.mario },
           { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
         ];
