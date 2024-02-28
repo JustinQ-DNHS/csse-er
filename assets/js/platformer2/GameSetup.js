@@ -446,7 +446,7 @@ const GameSetup = {
           { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.8515, yPercentage: 0.5 },
           { name: 'spike', id: 'spike', class: Spikes, data: this.assets.obstacles.spikesD, xPercentage: 0.8915, yPercentage: 0.5 },
           { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.5, minPosition: 0.2 },
-          // { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.65, minPosition: 0.55 },
+          { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.65, minPosition: 0.55 },
           // Screw this Goomba, made it almost impossible
           { name: 'mario', id: 'player', class: Player, data: this.assets.players.mario },
           { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
