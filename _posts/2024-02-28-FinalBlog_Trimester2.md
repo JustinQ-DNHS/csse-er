@@ -1,0 +1,39 @@
+---
+toc: true
+comments: true
+layout: post
+title: Final Blog for Trimester 2
+description: A lookback on the entirety of my time in Computer Science Software Engineer, and my opinion on the time here.
+type: ccc
+courses: { csse: {week: 24} }
+---
+
+## What Is Computer Science Software Engineering?
+CSSE (Computer Science Software Engineering) is a class designed to emulate an actual working environment and introduce students to the basics of programming and working as a team on a large project. This class gave me the first taste I ever had of programming and I really enjoyed it. We mostly worked in groups in order to create a project before a deadline and used resources such as GitHub and ScrumBoards in order to collaborate with each other in order to create or improve a project, which mostly focused on games due to the interesting nature to most people.
+
+## What Did You Learn or Do?
+Before this class I had virtually zero knowledge on programming, with the most programming I had done being in an elective class during my time at Oak Valley on Scratch, while I had also played with Code.org, and other similar websites, and also taken the Robotics class which programmed in C##. There was not much substance to these other classes, or the "languages" used were so simple or dumbed-down that it amounted to little or no experience. So beginning this class was definitely a first step to something I would soon enjoy greatly. <br>
+I started the class by installing VisualStudio Code, a code editing software designed to make programming easier to manage and actually do. I had greatly struggled with installing it due to an insufficient understanding of what to do, but soon I figured it out and was put into a group with Xavier, Daniel, and Timur. After a lot of learning and experimentation we had been assigned a final project with ~4 weeks to do it. We had to create a simple game, and our team made a very simple enemy dodging game, while not the original plan it did turn out decent for what we knew at the time. That game can be found <a href="https://justinq-dnhs.github.io/Game/">here</a>. <br>
+However this was all stuff that had occured within the first trimester of CSSE. During trimester 2 of CSSE we had started a completely new project with a new idea, we were to work together as a class of 22 people, in order to "improve" the base mario game we were provided with features. We were split into 5 groups, each having a purpose, those were: the **Manager** group, the **Animation** group, the **Leaderboard** group, the **Multiplayer** group, and the **Enemy** group, which was my group. <br>
+<img src="{{site.baseurl}}/images/blogs/teamDivision.png" alt="Picture of the team setup" style="padding-top:15px">
+<div style="text-align:center">
+    <text style="color:white; font-weight:bold; font-size:20px">A picture of the board that decided our groups</text>
+</div>
+We all split up and my group decided to split the 4 assignments among the 5 of us, which were to improve the Goomba, add a random feature, add more platforms, and to add a coin. All of which was almost already done by the original game, after letting everyone else choose I was left with the platforms, which I had wanted to change for a long time at that point. I first used the method to manipulte the positions of the Goomba for the platform, after that I worked with Mr. Mortensen in order to move around the hitboxes of each entity with respect to their canvases due to their being collission issues with Mario and the platform at times. The last large thing I worked on that was implemented was an attempt to make it so players could not enter the platforms, which was a bug that had existed from the very beginning. This bug was terrible to fix and the only solution I could think of was to increase the Y coordinate of the player by the gravity, since the issue was that the player would clip into the platform before realzing they should not fall down any further, however this caused a vibration with the player model due to the constant rising and falling of the player while on platforms. <br>
+Following all of this we merged all the groups works into one repository run by the management group, they had to resolve merge issues and work with each group in order to add each feature. We then presented this final project to the school at an event called Night at the Museum, more information on which can be found <a href="https://justinq-dnhs.github.io/csse-er//2024/02/27/Night@TheMuseum.html">here</a>. After this we were told to get ready for finals by creating a 4th level for the game and writing a final blog, which is currently being read by you. 
+### My 4th Level
+We were told to make the 4th level for our games unique so we all split off the main repository and started adding changes as we saw fit, the first of which I added were spikes, this was due to the fact that Goomba's were too easy to deal with and therefore having an unstoppable object that you must avoid felt necessary to me, then I designed the 4th level. I already knew I wanted it to be extremely challenging with only one clear solution, but with ingenuity and bugs... It would be possible to solve with other methods, so I decided to use the spikes to prevent the jumping methods with which people were jumping across entire levels and skipping content completely. Then I added holes you had to fall down and locked you in a thin chamber with a singular Goomba, which you could not kill due to the bouncing off of lauunching you into spikes which would kill you on contact. The only obvious way past being to walk behind the Goomba and jump into a safe chamber allow it to walk by before repeating the same method. After that I knew I wanted to use the spikes more so I added a difficult wall jump to which you would need to jump on a wall and off of it in order to get to the next part, this was extremely difficult and took me upwards of half an hour in order to complete. However I was told by Xavier that it was still too easy and had a bug with larger viewports that allowed you to kill the Goombas with no reprecussions, so I decided to add a Goomba on the last wall jump as well, of coure it also killed you when jumping on it and made the level extremely difficult. I still have not been able to beat the level on my device to this day. You can attempt my game <a href="https://justinq-dnhs.github.io/csse-er/2024/01/08/CSSE-oop-game-levels2.html">here</a>. however be aware that due to this being pulled from an incomplete version of the main repository, of which has now been destroyed, some features are incomplete such as the difficulty chooser.
+<div style="text-align:center">
+    <text style="color:white; font-weight:bold; font-size:24px">The Custom 4th Level of my Game</text>
+</div>
+<img src="{{site.baseurl}}/images/blogs/level4.png" alt="Image of My Custom 4th Level" style="padding-top:5px">
+
+## Lookback/Reflection
+I really enjoyed this class and can say I have definitely improved at programming exponentially since starting, while difficult to Mr. Mortensen's more handsoff style of teaching, it allows you to explore and do a lot more that you may not have learned about sooner if you had followed a traditional method, furthermore the encouragement to the use of using ChatGPT certainly made the class easier for many poeple, myself included. I am excited to see where this new knoewledge takes me and what I can do with it, I want to execute many ideas I have as soon as possible. 
+
+#### Other Projects I Worked on in This Class
+<div style="text-align:center; font-size:45px">
+    <a href="https://justinq-dnhs.github.io/student//2023/08/31/Snake.html">Snake Game</a> <br>
+    <a href="https://justinq-dnhs.github.io/student//2023/09/20/Spritesheet.html">A Spritesheet Usage Test</a> <br>
+    <a href="https://justinq-dnhs.github.io/student//2023/09/19/Calculator.html">Scientific Calculator</a> <br>
+</div>
